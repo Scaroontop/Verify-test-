@@ -13,20 +13,20 @@ const STORAGE_KEY = "verification-status";
 function checkExtensions() {
     const statusElement = document.getElementById('status');
     const spinner = document.getElementById('spinner');
-    const content = document.getElementById('content');
+    const success = document.getElementById('success');
     const failure = document.getElementById('failure');
+    const alreadyVerified = document.getElementById('already-verified');
 
     // Check if already verified
     if (localStorage.getItem(STORAGE_KEY) === "verified") {
-        statusElement.style.color = "blue";
-        statusElement.textContent = "Already verified. Please wait for the redirect...";
-        spinner.style.display = "none";
-        content.classList.remove('hidden');
+        statusElement.textContent = "";
+        spinner.classList.add('hidden');
+        alreadyVerified.classList.remove('hidden');
         setTimeout(() => redirectToPage(), 3000); // Simulate redirect
         return;
     }
 
-    // Perform verification if not verified
+    // Perform verification
     const promises = Object.entries(extensions).map(([name, url]) =>
         fetch(url, { method: 'HEAD' })
             .then(() => name)
@@ -36,24 +36,22 @@ function checkExtensions() {
     Promise.all(promises).then(results => {
         const validExtensions = results.filter(name => name !== null);
 
+        spinner.classList.add('hidden');
+
         if (validExtensions.length > 0) {
             localStorage.setItem(STORAGE_KEY, "verified");
-            statusElement.style.color = "green";
-            statusElement.textContent = `Successful verification: Please wait for the redirect...`;
-            spinner.style.display = "none";
-            content.classList.remove('hidden');
-            setTimeout(() => redirectToPage(), 3000); // Simulate redirect
+            success.classList.remove('hidden');
+            statusElement.textContent = `Successfully verified: Redirecting...`;
+            setTimeout(() => redirectToPage(), 3000); // Redirect
         } else {
-            statusElement.style.color = "red";
-            statusElement.textContent = `Failed to verify.`;
-            spinner.style.display = "none";
             failure.classList.remove('hidden');
+            statusElement.textContent = "Failed to verify.";
         }
     });
 }
 
 function redirectToPage() {
-    window.location.href = "https://your-redirect-url.com"; // Replace with your redirect URL
+    window.location.href = "https://your-redirect-url.com"; // Replace with your URL
 }
 
 checkExtensions();
