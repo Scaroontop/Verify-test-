@@ -4,88 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extension Verification</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f3f4f6;
-        }
-
-        .container {
-            text-align: center;
-            width: 400px;
-            background: #ffffff;
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 30px;
-        }
-
-        .logo {
-            margin-bottom: 20px;
-        }
-
-        .logo img {
-            width: 100px;
-        }
-
-        h1 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        p {
-            font-size: 1em;
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        #status {
-            font-size: 1.1em;
-            margin: 20px 0;
-            color: #666;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #3498db; /* Blue */
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <img src="https://via.placeholder.com/100" alt="Logo">
-        </div>
-        <h1>Verifying Your Browser</h1>
-        <p id="status">Checking for required extensions...</p>
-        <div class="spinner" id="spinner"></div>
-        <div id="content" class="hidden">
-            <h2>Success!</h2>
-            <p>Your extensions have been verified. Redirecting you now...</p>
-        </div>
-        <div id="failure" class="hidden">
-            <h2>Failed to Verify</h2>
-            <p>Unfortunately, we couldn’t detect if you were a Human Try again.</p>
+        <div class="verification-box">
+            <div class="logo">
+                <img src="https://via.placeholder.com/120" alt="Verification Logo">
+            </div>
+            <h1>Verifying Your Browser</h1>
+            <p id="status">Checking for required extensions...</p>
+            
+            <div id="spinner" class="spinner"></div>
+
+            <div id="success" class="hidden">
+                <div class="icon success-icon">✔</div>
+                <p class="message">Successfully verified. Redirecting...</p>
+            </div>
+            
+            <div id="failure" class="hidden">
+                <div class="icon failure-icon">✖</div>
+                <p class="message">Failed to verify. Please check your extensions.</p>
+            </div>
+
+            <div id="already-verified" class="hidden">
+                <div class="icon verified-icon">⚠</div>
+                <p class="message">Already verified. Please wait...</p>
+            </div>
         </div>
     </div>
     <script src="verification.js"></script>
