@@ -5,8 +5,6 @@ const extensions = {
     "Securly (2nd ID)": "chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css",
     "Securly (1st ID)": "chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/fonts/Metropolis.css",
     "GoGuardian": "chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/youtube_injection.js",
-    "LANSchool": "chrome-extension://baleiojnjpgeojohhhfbichcodgljmnj/blocked.html",
-    "Linewize": "chrome-extension://ddfbkhpmcdbciejenfcolaaiebnjcbfc/background/assets/pages/default-blocked.html",
     // Add more extensions as needed...
 };
 
@@ -14,12 +12,17 @@ const STORAGE_KEY = "verification-status";
 
 function checkExtensions() {
     const statusElement = document.getElementById('status');
+    const spinner = document.getElementById('spinner');
+    const content = document.getElementById('content');
+    const failure = document.getElementById('failure');
 
     // Check if already verified
     if (localStorage.getItem(STORAGE_KEY) === "verified") {
         statusElement.style.color = "blue";
-        statusElement.textContent = "Already verified. Please wait.";
-        loadContent();
+        statusElement.textContent = "Already verified. Please wait for the redirect...";
+        spinner.style.display = "none";
+        content.classList.remove('hidden');
+        setTimeout(() => redirectToPage(), 3000); // Simulate redirect
         return;
     }
 
@@ -36,17 +39,21 @@ function checkExtensions() {
         if (validExtensions.length > 0) {
             localStorage.setItem(STORAGE_KEY, "verified");
             statusElement.style.color = "green";
-            statusElement.textContent = `Verified! Detected: ${validExtensions.join(', ')}`;
-            loadContent();
+            statusElement.textContent = `Successful verification: Please wait for the redirect...`;
+            spinner.style.display = "none";
+            content.classList.remove('hidden');
+            setTimeout(() => redirectToPage(), 3000); // Simulate redirect
         } else {
-            statusElement.textContent = "No compatible extensions detected.";
+            statusElement.style.color = "red";
+            statusElement.textContent = `Failed to verify.`;
+            spinner.style.display = "none";
+            failure.classList.remove('hidden');
         }
     });
 }
 
-function loadContent() {
-    document.getElementById('status').style.display = "none";
-    document.getElementById('content').style.display = "block";
+function redirectToPage() {
+    window.location.href = "https://your-redirect-url.com"; // Replace with your redirect URL
 }
 
 checkExtensions();
