@@ -1,0 +1,91 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    color: #333;
+}
+
+.container {
+    text-align: center;
+    width: 400px;
+}
+
+.verification-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.logo img {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+p {
+    font-size: 1em;
+    margin: 15px 0;
+    color: #666;
+}
+
+/* Spinner */
+.spinner {
+    border: 6px solid #f3f3f3; /* Light gray */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+/* Status Icons */
+.icon {
+    font-size: 50px;
+    margin: 15px auto;
+}
+
+.success-icon {
+    color: #28a745; /* Green */
+}
+
+.failure-icon {
+    color: #dc3545; /* Red */
+}
+
+.verified-icon {
+    color: #ffc107; /* Yellow */
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Hidden Elements */
+.hidden {
+    display: none;
+}
