@@ -1,30 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Verification Screen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Verification</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+        }
+
+        .container {
             text-align: center;
-            margin-top: 50px;
+            width: 400px;
+            background: #ffffff;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px;
         }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
         #status {
-            color: red;
-            font-size: 18px;
+            font-size: 1.1em;
+            margin: 20px 0;
+            color: #666;
         }
-        #content {
+
+        .spinner {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
             display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Extension Verification</h1>
-    <p id="status">Checking for required extensions...</p>
-    <div id="content">
-        <h2>Welcome!</h2>
-        <p>Your extensions have been verified. The rest of the content is now available.</p>
+    <div class="container">
+        <div class="logo">
+            <img src="https://via.placeholder.com/100" alt="Logo">
+        </div>
+        <h1>Verifying Your Browser</h1>
+        <p id="status">Checking for required extensions...</p>
+        <div class="spinner" id="spinner"></div>
+        <div id="content" class="hidden">
+            <h2>Success!</h2>
+            <p>Your extensions have been verified. Redirecting you now...</p>
+        </div>
+        <div id="failure" class="hidden">
+            <h2>Failed to Verify</h2>
+            <p>Unfortunately, we couldn’t detect if you were a Human Try again.</p>
+        </div>
     </div>
-
     <script src="verification.js"></script>
 </body>
 </html>
