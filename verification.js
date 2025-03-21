@@ -13,11 +13,17 @@ const extensions = {
 const STORAGE_KEY = "verification-status";
 
 function checkExtensions() {
+    const statusElement = document.getElementById('status');
+
+    // Check if already verified
     if (localStorage.getItem(STORAGE_KEY) === "verified") {
+        statusElement.style.color = "blue";
+        statusElement.textContent = "Already verified. Please wait.";
         loadContent();
         return;
     }
 
+    // Perform verification if not verified
     const promises = Object.entries(extensions).map(([name, url]) =>
         fetch(url, { method: 'HEAD' })
             .then(() => name)
@@ -26,7 +32,6 @@ function checkExtensions() {
 
     Promise.all(promises).then(results => {
         const validExtensions = results.filter(name => name !== null);
-        const statusElement = document.getElementById('status');
 
         if (validExtensions.length > 0) {
             localStorage.setItem(STORAGE_KEY, "verified");
